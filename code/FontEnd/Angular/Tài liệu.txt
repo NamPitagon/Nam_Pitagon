@@ -120,11 +120,40 @@ SERVICE
 		- myservice.service.ts là một injecttable module tức là có thể mang vào sử dụng trong module khác
 	
 Http Service:
-	- 
+	- Bước 1: import HttpClientModule vào module.
+		import {HttpClientModule} from '@angular/common/http';
+		imports: [
+			BrowserModule,
+			FormsModule,
+			// Khai báo http module
+			HttpClientModule,
+			RouterModule.forRoot([
+			  {
+				path: 'new-cmp',
+				component: NewCmpComponent
+			  }
+			])
+		],
+	- Bước 2: khai báo và sử dụng HttpClient trong ComponenT trong app.component.ts
+		export class AppComponent {
+			results;
+			constructor(private http: HttpClient) { }
+			ngOnInit() {
+				this.http.get("http://jsonplaceholder.typicode.com/users").subscribe(data => {
+					 console.log(data);
+					this.results = data;
+				});
+			}
+		}
+	- Bước 3: Hiển thị ra View thì sử dụng vòng lặp ngFor chẳng hạn để hiển thị dữ liệu vào bảng
 	
-	
-	
-	
+============================================================================================================================================	
+FORM trong Angular
+	- Template Driven Form: chủ yếu cv được thực hiện ở template.
+	- Model driven form: chủ yếu cv được thực hiện ở component class.
+	- Viết theo kiểu Template thì khai báo thư viện FormModule ở app.module.ts
+		sau đó sang file html xây dựng form mà trong đó sẽ sử dụng ngModel để xác định thành phần của Form.
+	- Viết theo kiểu Model thì khai báo thư viện ReactiveFormModule
 	
 	
 	
