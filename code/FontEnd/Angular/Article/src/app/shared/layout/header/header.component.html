@@ -1,0 +1,33 @@
+<nav class="container">
+    <a routerLink="/" class="navbar-brand">conduit</a>
+    <!-- khi chưa đăng nhập sẽ hiển thị các lựa chọn này -->
+    <ul class="nav navbar-nav pull-xs-right" *appShowAuthen = "false">
+        <li class="nav-item">
+            <a routerLink="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav">
+            <a routerLink="/login" class="nav-link" routerLinkActive="active">Sign in</a>
+        </li>
+        <li class="nav">
+            <a routerLink="/register" class="nav-link" routerLinkActive="active">Sign up</a>
+        </li>
+    </ul>
+    <!-- Khi đã đăng nhập thành công thì sẽ hiển thị các lựa chọn này -->
+    <ul class="nav navbar-nav pull-xs-right" *appShowAuthen = "true">
+        <li class="nav-item">
+            <!-- [routerLinkActiveOptions]="{exact: true}" tức là khi Angular mặc định nó sẽ liên kết với 1 trang trắng có đường dẫn thêm / vì vậy để liên kết đúng thì ta sử dụng -->
+            <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/editor" class="nav-link" routerLinkActive="active"><i class="ion-compose"></i>&nbsp;New Article</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/settings" class="nav-link" routerLinkActive="active"><i class="ion-gear-a"></i>&nbsp;Settings</a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/profile', currentUser.username]" class="nav-link" routerLinkActive="active" >
+                <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" /> {{currentUser.username}}
+            </a>
+        </li>
+    </ul>
+</nav>

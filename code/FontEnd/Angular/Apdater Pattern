@@ -1,0 +1,5 @@
+- Adapter Pattern đều sử dụng gói wrap object để biến interface ban đầu thành interface client cần sử dụng.
+- Hiểu đơn giản Adapter như sau 
+	+ Ta có 1 interface chứa hàm cần triển khai.
+	+ 1 class cũng có hàm giống như interface nhưng đã được triển khai rồi.
+	+ adapter ở đây là tạo 1 class đặc biệt triển khai cái interface ban đ
