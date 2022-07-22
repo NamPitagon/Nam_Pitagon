@@ -1,141 +1,3 @@
-<!-- <h2> Chuyển đổi các loại dữ liệu</h2>
-<form action="" class="convert">
-  <div class="DataLeft">
-    <label for="converts">Dữ liệu chuyển đổi</label>
-    <select id="converts">
-      <option value="string">String</option>
-      <option value="base64">Base64</option>
-      <option value="bytes">Array Bytes</option>
-      <option value="hex">Hex</option>
-    </select>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
-  </div>
-  <div class="DataRight">
-    <label for="converts">Dữ liệu muốn chuyển đổi</label>
-    <select id="converts">
-      <option value="string">String</option>
-      <option value="base64">Base64</option>
-      <option value="bytes">Array Bytes</option>
-      <option value="hex">Hex</option>
-    </select>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
-  </div>
-</form> -->
-<style>
-  .header {
-    border-bottom: 1px solid grey;
-    padding: 1rem;
-    margin: 0px auto 0 auto;
-    height: 10%;
-  }
-
-  .header h2 {
-    margin: 0px 0;
-  }
-
-  .content {
-    height: 200px;
-    padding: 1rem;
-  }
-
-  .content .formConvert {
-    height: 100%;
-  }
-
-  .type {
-    padding: 0rem;
-    height: 20%;
-    display: flex;
-    border-top: 0.2px solid grey;
-  }
-
-  .inputType {
-    border-left: 0.2px solid grey;
-    border-right: 0.2px solid grey;
-    width: 40%;
-    height: 100%;
-  }
-
-  .buttonconvert {
-    width: 20%;
-    height: 100%;
-  }
-
-  .outputType {
-    border-left: 0.2px solid grey;
-    border-right: 0.2px solid grey;
-    width: 40%;
-    height: 100%;
-  }
-
-  .valueConvert {
-    padding: 0rem;
-    height: 80%;
-    display: flex;
-    border-top: 0.2px solid grey;
-  }
-
-  .invalue {
-    border-left: 0.2px solid grey;
-    border-bottom: 0.2px solid grey;
-    width: 50%;
-    height: 100%;
-  }
-
-  .outvalue {
-    border-left: 0.2px solid grey;
-    border-bottom: 0.2px solid grey;
-    border-right: 0.2px solid grey;
-    width: 50%;
-    height: 100%;
-  }
-
-  .kieudulieu {
-    height: 100%;
-    display: flex;
-  }
-
-  .kieudulieu .phathien {
-    width: 50%;
-    height: 100%;
-    display: block;
-  }
-
-  .kieudulieu .dulieumacdinh {
-    background-color: yellow;
-    width: 25%;
-    display: block;
-  }
-
-  .kieudulieu .luachonkieu {
-    background-color: greenyellow;
-    width: 25%;
-    display: block;
-  }
-
-  .outputType {
-    height: 100%;
-    display: flex;
-  }
-
-  .outputType .phathien {
-    width: 50%;
-    display: block;
-  }
-
-  .outputType .dulieumacdinh {
-    background-color: yellow;
-    width: 25%;
-    display: block;
-  }
-
-  .outputType .luachonkieu {
-    background-color: greenyellow;
-    width: 25%;
-    display: block;
-  }
-</style>
-
 <div class="header">
   <h2>
     <span style="color: blue;">G</span>
@@ -149,46 +11,57 @@
 </div>
 
 <div class="content">
-  <div class="formConvert">
+  <div class="content1">
     <div class="type">
       <div class="inputType">
-        <div class="kieudulieu">
-          <div class="phathien">
-            <p style="margin: 0.2rem; text-align: center; padding: 10px;">Phát hiện kiểu dữ liệu</p>
-          </div>
-          <div class="dulieumacdinh">
-            <p style="margin: 0.2rem; text-align: center; padding: 10px;">String</p>
-          </div>
-          <div class="luachonkieu">
-            <button style="margin: 0.2rem; text-align: center; padding: 10px;">Lựa chọn</button>
-          </div>
-        </div>
-      </div>
-      <div class="buttonconvert">
-        <button>Thực hiện chuyển đổi</button>
-      </div>
-      <div class="outputType">
-        <div class="phathien">
-          <span style="margin-top: 20px; margin-top: 50px 0;">Phát hiện kiểu dữ liệu</span>
+        <div class="phathien">Phát hiện kiểu dữ liệu
         </div>
         <div class="dulieumacdinh">
-          <span style="text-align:center;">String</span>
+          <select id="converts">
+            <option value="string">String</option>
+            <option value="base64">Base64</option>
+            <option value="bytes">Array Bytes</option>
+            <option value="hex">Hex</option>
+          </select>
         </div>
-        <div class="luachonkieu" >
-          <button>Lựa chọn</button>
+      </div>
+      <div class="outputType">
+        <div class="phathien">Kiểu dữ liệu cần chuyển</div>
+        <div class="dulieumacdinh" id="converts">
+          <select>
+            <option value="string">String</option>
+            <option value="base64">Base64</option>
+            <option value="bytes">Array Bytes</option>
+            <option value="hex">Hex</option>
+          </select>
         </div>
       </div>
     </div>
-    <div class="valueConvert">
-      <div class="invalue">
-
+  
+    <div class="value">
+      <div class="textBox abc">
+        <div class="subbox">
+          <textarea class="invalue" rows="10">
+  
+          </textarea>
+        </div>
+       
       </div>
-      <div class="outvalue">
+      <div class="textBox" >
+        <div class="subbox">
+          <textarea class="outvalue" rows="10">
 
+          </textarea>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="buttonconvert">
+  <button class="BtnConvert">Thực hiện chuyển đổi</button>
+</div>
+
 <div class="footer">
 
 </div>
