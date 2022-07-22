@@ -15,13 +15,13 @@ namespace TestConvertData
             string resultBase64ToString = ConvertBase64toString("SGEgTm9p");
             Console.WriteLine(resultBase64ToString); // Ha Noi
 
-            string resultStringToHex = ConvertStringToHex("MIKA@?&^");
-            Console.WriteLine(resultStringToHex); // 4D494B41403F265E
+            string resultStringToHex = ConvertStringToHex("abc");
+            Console.WriteLine(resultStringToHex); // 616263
 
-            string resultHexToString = ConvertHexToString("4D494B41403F265E");
-            Console.WriteLine(resultHexToString); // MIKA@?&^
+            string resultHexToString = ConvertHexToString("6100620063");
+            Console.WriteLine(resultHexToString); // abc
 
-            byte[] b = { (byte)'a', (byte)'b', (byte)'$' };
+            byte[] b = { (byte)'57', (byte)'55', (byte)'57', (byte)'56' };
             string resultByteArrayToString = ConvertByteArrayToString(b);
             Console.WriteLine(resultByteArrayToString); // ab$
 
@@ -38,7 +38,7 @@ namespace TestConvertData
             string resultByteArrayToBase64 = ConvertArrayByteToBase64(b1);
             Console.WriteLine(resultByteArrayToBase64); // YWIk
 
-            byte[] resultBase64ToArrayByte = ConvertStringToByteArray("YWIk");
+            byte[] resultBase64ToArrayByte = ConvertStringToByteArray("9798");
             Console.WriteLine(resultBase64ToArrayByte); // 89 87 73 107
 
             byte[] resultHexToArrayByte = ConvertHexToArraybyte("61-62-24");
@@ -81,9 +81,8 @@ namespace TestConvertData
 
         public static string ConvertHexToString(string strHex)
         {
-            int numberChar = strHex.Length;
             // vẫn cần phải chuyển đổi sang mảng byte
-            byte[] bytes = new byte[numberChar / 2];
+            var bytes = new byte[strHex.Length / 2];
             for (int i = 0; i < bytes.Length; i++)
             {
                 bytes[i] = Convert.ToByte(strHex.Substring(i * 2, 2), 16);
