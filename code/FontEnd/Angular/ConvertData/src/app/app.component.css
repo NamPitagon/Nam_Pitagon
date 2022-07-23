@@ -1,0 +1,105 @@
+.header {
+    border-bottom: 1px solid grey;
+    padding: 1rem;
+    margin: 0px auto 0 auto;
+    height: 10%;
+}
+
+.header h2 {
+    margin: 0px 0;
+}
+
+.content {
+    padding: 1rem;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+
+.contenttype {
+    padding: 0rem;
+    display: flex;
+    border-top: 0.1px solid grey;
+    align-items: center;
+}
+
+.inputType {
+    border-left: 0.1px solid grey;
+    border-right: 0.1px solid grey;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+
+.outputType {
+    border-right: 0.1px solid grey;
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    align-items: center;
+}
+
+.contentvalue {
+    padding: 0rem;
+    display: flex;
+}
+
+.textBox {
+    flex: 1;
+    border: 0.1px solid grey;
+}
+
+.contentvalue .small{
+    border-right: none;
+}
+
+textarea{
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+
+.inputType .lbText {
+    font-size: 20px;
+}
+
+
+.outputType {
+    display: flex;
+    justify-content: space-between;
+}
+
+.outputType .lbText {
+    font-size: 20px;
+}
+
+.BtnConvert {
+    padding: 5px;
+    border: 1px solid grey;
+    color: white;
+    font-size: 19px;
+    background-color: LightSalmon;
+    border-radius: 5px;
+}
+.buttonconvert{
+    text-align: center;
+    padding: 10px;
+}
+select {
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.lbText span {
+    text-align: center;
+}
+
+.subbox{
+    display: flex;
+    padding: 10px;
+    outline: none;
+}
