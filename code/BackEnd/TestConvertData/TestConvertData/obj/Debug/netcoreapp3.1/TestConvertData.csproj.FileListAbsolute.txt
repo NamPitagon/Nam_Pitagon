@@ -1,0 +1,14 @@
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\bin\Debug\netcoreapp3.1\TestConvertData.exe
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\bin\Debug\netcoreapp3.1\TestConvertData.deps.json
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\bin\Debug\netcoreapp3.1\TestConvertData.runtimeconfig.json
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\bin\Debug\netcoreapp3.1\TestConvertData.runtimeconfig.dev.json
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\bin\Debug\netcoreapp3.1\TestConvertData.dll
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\bin\Debug\netcoreapp3.1\TestConvertData.pdb
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.csproj.AssemblyReference.cache
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.AssemblyInfoInputs.cache
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.AssemblyInfo.cs
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.csproj.CoreCompileInputs.cache
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.dll
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.pdb
+D:\Nam_Pitagon\code\ConvertData\TestConvertData\TestConvertData\obj\Debug\netcoreapp3.1\TestConvertData.genruntimeconfig.cache
