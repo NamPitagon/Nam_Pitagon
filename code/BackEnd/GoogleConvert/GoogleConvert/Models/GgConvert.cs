@@ -16,8 +16,15 @@ namespace GoogleConvert.Models
         #region Convert string -> base64, string -> hex, string -> byte[] và ngược lại
         public ResponseData StringToBase64(string inputValue)
         {
-            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
-            return new ResponseData { value = Convert.ToBase64String(bytes), success = true, message = "OK" };
+            if (inputValue == null)
+            {
+                return new ResponseData { value = null, success = false, message = "Error" };
+            }
+            else
+            {
+                byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
+                return new ResponseData { value = Convert.ToBase64String(bytes), success = true, message = "OK" };
+            }
         }
 
         public ResponseData StringToHex(string inputValue)

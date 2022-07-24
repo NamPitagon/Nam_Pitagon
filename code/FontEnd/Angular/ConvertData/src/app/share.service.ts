@@ -41,34 +41,126 @@ export class ShareService {
         }
       });
   }
-  StringToArrByte(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/StringToArrByte', val);
+  StringToArrByte(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/StringToArrByte',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  ArrByteToString(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/ArrByteToString', val);
+  ArrByteToString(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/ArrByteToString',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  Base64ToString(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/Base64ToString', val);
+
+  Base64ToString(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/Base64ToString',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  HexToString(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/HexToString', val);
+  
+  HexToString(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/HexToString',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  Base64ToArrByte(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/Base64ToArrByte', val);
+  Base64ToArrByte(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/Base64ToArrByte',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  Base64ToHex(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/Base64ToHex', val);
+  Base64ToHex(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/Base64ToHex',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  ArrByteToBase64(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/ArrByteToBase64', val);
+  ArrByteToBase64(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/ArrByteToBase64',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  HexToBase64(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/HexToBase64', val);
+  HexToBase64(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/HexToBase64',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  HexToArrByte(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/HexToArrByte', val);
+  HexToArrByte(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/HexToArrByte',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
-  ArrByteToHex(val: any): Observable<any> {
-    return this.http.post<any>(this.apiURL + '/ArrByteToHex', val);
+  ArrByteToHex(inputValue: string): Observable<any> {
+    
+    return this.http.post(this.apiURL + '/ArrByteToHex',
+      {
+        inputValue: inputValue
+      },
+      {
+        params: {
+          inputValue: inputValue
+        }
+      });
   }
 }

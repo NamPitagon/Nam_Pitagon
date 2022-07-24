@@ -31,7 +31,6 @@ namespace GoogleConvert.Models
                 return bytes;
             }
         }
-
         public string ConvertArrByteToString(byte[] bytes)
         {
             if (bytes.Length == 0) return null;
