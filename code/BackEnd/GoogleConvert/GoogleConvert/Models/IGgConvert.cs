@@ -1,26 +1,28 @@
-﻿namespace GoogleConvert.Models
+﻿using GoogleConvert.Dto;
+
+namespace GoogleConvert.Models
 {
     public interface IGgConvert
     {
         #region Convert string -> base64,string -> hex, string -> arrayByte và ngược lại
-        public string StringToBase64(string str);
-        public string StringToHex(string str);
-        public string StringToArrByte(string str);
-        public string Base64ToString(string strBase64);
-        public string HexToString(string strHex);
-        public string ArrByteToString(string strArrayByte);
+        public ResponseData StringToBase64(string inputValue);
+        public ResponseData StringToHex(string inputValue);
+        public ResponseData StringToArrByte(string inputValue);
+        public ResponseData Base64ToString(string inputValue);
+        public ResponseData HexToString(string inputValue);
+        public ResponseData ArrByteToString(string inputValue);
         #endregion
 
         #region Convert base64 -> hex, base64 -> arrayByte và ngược lại
-        public string Base64ToHex(string strBase64);
-        public string Base64ToArrByte(string strBase64);
-        public string HexToBase64(string strHex);
-        public string ArrByteToBase64(string strArrayByte);
+        public ResponseData Base64ToHex(string inputValue);
+        public ResponseData Base64ToArrByte(string inputValue);
+        public ResponseData HexToBase64(string inputValue);
+        public ResponseData ArrByteToBase64(string inputValue);
         #endregion
 
         #region Convert hex -> arrayByte và ngược lại
-        public string HexToArrByte(string strHex);
-        public string ArrByteToHex(string strArrayByte);
+        public ResponseData HexToArrByte(string inputValue);
+        public ResponseData ArrByteToHex(string inputValue);
         #endregion
     }
 }

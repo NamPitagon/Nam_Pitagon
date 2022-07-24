@@ -1,84 +1,91 @@
-﻿using GoogleConvert.Models;
+﻿using GoogleConvert.Dto;
+using GoogleConvert.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace GoogleConvert.Controllers
 {
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class GgConvertController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+        public GgConvertController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public IGgConvert googleConvert = new GgConvert(new ConvertShare());
 
         [HttpPost("StringToBase64")]
-        public ActionResult<string> StringToBase64(string str)
+        public ResponseData StringToBase64(string inputValue)
         {
-            return googleConvert.StringToBase64(str);
+            return googleConvert.StringToBase64(inputValue);
         }
 
         [HttpPost("StringToArrByte")]
-        public ActionResult<string> StringToArrByte(string str)
+        public ResponseData StringToArrByte(string inputValue)
         {
-            return googleConvert.StringToArrByte(str);
+            return googleConvert.StringToArrByte(inputValue);
         }
 
         [HttpPost("StringToHex")]
-        public ActionResult<string> StringToHex(string str)
+        public ResponseData StringToHex(string inputValue)
         {
-            return googleConvert.StringToHex(str);
+            return googleConvert.StringToHex(inputValue);
         }
 
         [HttpPost("ArrByteToBase64")]
-        public ActionResult<string> ArrByteToBase64(string strArrayByte)
+        public ResponseData ArrByteToBase64(string inputValue)
         {
-            return googleConvert.ArrByteToBase64(strArrayByte);
+            return googleConvert.ArrByteToBase64(inputValue);
         }
 
         [HttpPost("ArrByteToHex")]
-        public ActionResult<string> ArrByteToHex(string strArrayByte)
+        public ResponseData ArrByteToHex(string inputValue)
         {
-            return googleConvert.ArrByteToHex(strArrayByte);
+            return googleConvert.ArrByteToHex(inputValue);
         }
 
         [HttpPost("ArrByteToString")]
-        public ActionResult<string> ArrByteToString(string strArrayByte)
+        public ResponseData ArrByteToString(string inputValue)
         {
-            return googleConvert.ArrByteToString(strArrayByte);
+            return googleConvert.ArrByteToString(inputValue);
         }
 
         [HttpPost("Base64ToArrByte")]
-        public ActionResult<string> Base64ToArrByte(string strBase64)
+        public ResponseData Base64ToArrByte(string inputValue)
         {
-            return googleConvert.Base64ToArrByte(strBase64);
+            return googleConvert.Base64ToArrByte(inputValue);
         }
 
         [HttpPost("Base64ToHex")]
-        public ActionResult<string> Base64ToHex(string strBase64)
+        public ResponseData Base64ToHex(string inputValue)
         {
-            return googleConvert.Base64ToHex(strBase64);
+            return googleConvert.Base64ToHex(inputValue);
         }
 
         [HttpPost("Base64ToString")]
-        public ActionResult<string> Base64ToString(string strBase64)
+        public ResponseData Base64ToString(string inputValue)
         {
-            return googleConvert.Base64ToString(strBase64);
+            return googleConvert.Base64ToString(inputValue);
         }
 
         [HttpPost("HexToArrByte")]
-        public ActionResult<string> HexToArrByte(string strHex)
+        public ResponseData HexToArrByte(string inputValue)
         {
-            return googleConvert.HexToArrByte(strHex);
+            return googleConvert.HexToArrByte(inputValue);
         }
 
         [HttpPost("HexToBase64")]
-        public ActionResult<string> HexToBase64(string strHex)
+        public ResponseData HexToBase64(string inputValue)
         {
-            return googleConvert.HexToBase64(strHex);
+            return googleConvert.HexToBase64(inputValue);
         }
 
         [HttpPost("HexToString")]
-        public ActionResult<string> HexToString(string strHex)
+        public ResponseData HexToString(string inputValue)
         {
-            return googleConvert.HexToString(strHex);
+            return googleConvert.HexToString(inputValue);
         }
     }
 }

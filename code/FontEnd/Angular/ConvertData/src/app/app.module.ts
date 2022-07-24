@@ -1,22 +1,29 @@
+// khai báo các thư viện, ...
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// khai báo 2 thư viện để làm việc với form
+
+// khai báo thêm các thư viện
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GgConvertComponent } from './gg-convert/gg-convert.component';
+import {HttpClientModule} from '@angular/common/http';
+import { ShareService } from './share.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GgConvertComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

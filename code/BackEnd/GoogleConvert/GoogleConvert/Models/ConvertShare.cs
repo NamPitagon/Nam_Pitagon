@@ -1,37 +1,47 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
-
 namespace GoogleConvert.Models
 {
     public class ConvertShare
     {
-        public byte[] StringToArrByte(string str)
+        public byte[] ConvertStringToArrByte(string inputValue)
         {
-            return Encoding.UTF8.GetBytes(str);
+            if (string.IsNullOrEmpty(inputValue)) return null;
+            else return Encoding.UTF8.GetBytes(inputValue);
         }
 
-        public byte[] Base64ToArrByte(string strBase64)
+        public byte[] ConvertBase64ToArrByte(string inputValue)
         {
-            return Convert.FromBase64String(strBase64);
+            if (string.IsNullOrEmpty(inputValue)) return null;
+            else return Convert.FromBase64String(inputValue);
         }
 
-        public byte[] HexToArrByte(string strHex)
+        public byte[] ConvertHexToArrByte(string inputValue)
         {
-            strHex = Regex.Replace(strHex, @"\s+|-", "");
-            byte[] bytes = new byte[strHex.Length / 2];
-            for (int i = 0; i < bytes.Length; i++)
+            if (string.IsNullOrEmpty(inputValue)) return null;
+            else
             {
-                bytes[i] = Convert.ToByte(strHex.Substring(i * 2, 2), 16);
+                inputValue = Regex.Replace(inputValue, @"\s+|-", "");
+                byte[] bytes = new byte[inputValue.Length / 2];
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    bytes[i] = Convert.ToByte(inputValue.Substring(i * 2, 2), 16);
+                }
+                return bytes;
             }
-            return bytes;
         }
 
-        public string ArrByteToString(byte[] bytes)
+        public string ConvertArrByteToString(byte[] bytes)
         {
-            StringBuilder strBuilder = new StringBuilder();
-            foreach (byte b in bytes)
-                strBuilder.Append(b.ToString() + " ");
-            return strBuilder.ToString().Trim();
+            if (bytes.Length == 0) return null;
+            else
+            {
+                StringBuilder strBuilder = new StringBuilder();
+                foreach (byte b in bytes)
+                    strBuilder.Append(b.ToString() + " ");
+                return strBuilder.ToString().Trim();
+            }
         }
     }
 }

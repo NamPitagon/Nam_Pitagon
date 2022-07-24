@@ -1,0 +1,60 @@
+<div class="header">
+    <h2>
+        <span style="color: blue;">G</span>
+        <span style="color: red;">o</span>
+        <span style="color: black;">o</span>
+        <span style="color: blue;">g</span>
+        <span style="color: green;">l</span>
+        <span style="color: red;">e </span>
+        <span style="color: gray;">Convert</span>
+    </h2>
+</div>
+
+<form class="content" #heroForm="ngForm">
+    <div class="contenttype">
+        <div class="inputType">
+            <div class="lbText">Phát hiện kiểu dữ liệu</div>
+            <div class="chooseDataType">
+                <select id="converts" [(ngModel)]="inputType" name="name"> 
+                    <option *ngFor="let val of type" [value]="val.code">{{val.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="outputType">
+            <div class="lbText">Kiểu dữ liệu cần chuyển</div>
+            <div class="chooseDataType">
+                <select id="converts" [(ngModel)]="outputType" name="name1">
+                    <option *ngFor="let val of type" [value]="val.code">{{val.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="contentvalue">
+        <div class="textBox small">
+            <div class="subbox">
+                <textarea class="invalue" rows="10" [(ngModel)]="inputValue" name="name2" required>
+
+                </textarea>
+            </div>
+
+        </div>
+        <div class="textBox">
+            <div class="subbox">
+                <textarea class="outvalue" rows="10" [(ngModel)]="outputValue" name="name3" required>
+
+                </textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttonconvert">
+        <button class="btnConvert" (click)="clickConvert()">Thực hiện chuyển đổi</button>
+    </div>
+
+</form>
+
+
+<div class="footer">
+
+</div>

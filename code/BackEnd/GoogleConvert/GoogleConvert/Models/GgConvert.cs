@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using GoogleConvert.Dto;
+using System;
+using System.Text;
 using System.Text.RegularExpressions;
-
 namespace GoogleConvert.Models
 {
     public class GgConvert : IGgConvert
@@ -13,32 +14,32 @@ namespace GoogleConvert.Models
         }
 
         #region Convert string -> base64, string -> hex, string -> byte[] và ngược lại
-        public string StringToBase64(string str)
+        public ResponseData StringToBase64(string inputValue)
         {
-            byte[] bytes = _convertShare.StringToArrByte(str);
-            return Convert.ToBase64String(bytes);
+            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
+            return new ResponseData { value = Convert.ToBase64String(bytes), success = true, message = "OK" };
         }
 
-        public string StringToHex(string str)
+        public ResponseData StringToHex(string inputValue)
         {
-            byte[] bytes = _convertShare.StringToArrByte(str);
+            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
             StringBuilder strBuilder = new StringBuilder(bytes.Length * 2);
             foreach (byte b in bytes)
                 strBuilder.AppendFormat("{0:X2}", b);
-            return strBuilder.ToString();
+            return new ResponseData { value = strBuilder.ToString(), success = true, message = "OK" };
         }
 
-        public string StringToArrByte(string str)
+        public ResponseData StringToArrByte(string inputValue)
         {
-            byte[] bytes = _convertShare.StringToArrByte(str);
-            string resultArrbyte = _convertShare.ArrByteToString(bytes);
-            return resultArrbyte;
+            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
+            string resultArrbyte = _convertShare.ConvertArrByteToString(bytes);
+            return new ResponseData { value = resultArrbyte, success = true, message = "OK" };
         }
 
-        public string ArrByteToString(string strArrayByte)
+        public ResponseData ArrByteToString(string inputValue)
         {
-            strArrayByte = Regex.Replace(strArrayByte, @"\s+", " ");
-            string[] arr = strArrayByte.Split(new Char[] { ' ', '-' });
+            inputValue = Regex.Replace(inputValue, @"\s+", " ");
+            string[] arr = inputValue.Split(new Char[] { ' ', '-' });
             byte[] bytes = new byte[arr.Length];
             try
             {
@@ -47,63 +48,63 @@ namespace GoogleConvert.Models
             }
             catch (Exception e)
             {
-                return e.ToString();
+                return new ResponseData { value = e.ToString(), success = false, message = "Error" };
             }
-            return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+            return new ResponseData { value = Encoding.UTF8.GetString(bytes, 0, bytes.Length), success = true, message = "OK" };
         }
 
-        public string Base64ToString(string strBase64)
+        public ResponseData Base64ToString(string inputValue)
         {
-            byte[] bytes = _convertShare.Base64ToArrByte(strBase64);
-            return Encoding.UTF8.GetString(bytes);
+            byte[] bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
+            return new ResponseData { value = Encoding.UTF8.GetString(bytes), success = true, message = "OK" };
         }
 
-        public string HexToString(string strHex)
+        public ResponseData HexToString(string inputValue)
         {
-            byte[] bytes = _convertShare.HexToArrByte(strHex);
-            return Encoding.UTF8.GetString(bytes);
+            byte[] bytes = _convertShare.ConvertHexToArrByte(inputValue);
+            return new ResponseData { value = Encoding.UTF8.GetString(bytes), success = true, message = "OK" };
         }
         #endregion
 
         #region Convert base64 -> hex, base -> byte[] và ngược lại
-        public string Base64ToArrByte(string strBase64)
+        public ResponseData Base64ToArrByte(string inputValue)
         {
-            byte[] bytes = _convertShare.Base64ToArrByte(strBase64);
-            string resultArrByte = _convertShare.ArrByteToString(bytes);
-            return resultArrByte;
+            byte[] bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
+            string resultArrByte = _convertShare.ConvertArrByteToString(bytes);
+            return new ResponseData { value = resultArrByte, success = true, message = "OK" };
         }
 
-        public string Base64ToHex(string strBase64)
+        public ResponseData Base64ToHex(string inputValue)
         {
-            byte[] bytes = _convertShare.Base64ToArrByte(strBase64);
-            return BitConverter.ToString(bytes);
+            byte[] bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
+            return new ResponseData { value = BitConverter.ToString(bytes), success = true, message = "OK" };
         }
 
-        public string ArrByteToBase64(string strArrayByte)
+        public ResponseData ArrByteToBase64(string inputValue)
         {
-            byte[] bytes = _convertShare.StringToArrByte(strArrayByte);
-            return Convert.ToBase64String(bytes, 0, bytes.Length);
+            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
+            return new ResponseData { value = Convert.ToBase64String(bytes, 0, bytes.Length), success = true, message = "OK" };
         }
 
-        public string HexToBase64(string strHex)
+        public ResponseData HexToBase64(string inputValue)
         {
-            byte[] bytes = _convertShare.HexToArrByte(strHex);
-            return Convert.ToBase64String(bytes);
+            byte[] bytes = _convertShare.ConvertHexToArrByte(inputValue);
+            return new ResponseData { value = Convert.ToBase64String(bytes), success = true, message = "OK" };
         }
         #endregion
 
         #region Convert Hex -> byte [] và ngược lại
-        public string HexToArrByte(string strHex)
+        public ResponseData HexToArrByte(string inputValue)
         {
-            byte[] bytes = _convertShare.HexToArrByte(strHex);
-            string resultArrbyte = _convertShare.ArrByteToString(bytes);
-            return resultArrbyte;
+            byte[] bytes = _convertShare.ConvertHexToArrByte(inputValue);
+            string resultArrbyte = _convertShare.ConvertArrByteToString(bytes);
+            return new ResponseData { value = resultArrbyte, success = true, message = "OK" };
         }
 
-        public string ArrByteToHex(string strArrayByte)
+        public ResponseData ArrByteToHex(string inputValue)
         {
-            strArrayByte = Regex.Replace(strArrayByte, @"\s+", " ");
-            string[] arr = strArrayByte.Split(new Char[] { ' ', '-' });
+            inputValue = Regex.Replace(inputValue, @"\s+", " ");
+            string[] arr = inputValue.Split(new Char[] { ' ', '-' });
             byte[] bytes = new byte[arr.Length];
             try
             {
@@ -112,9 +113,9 @@ namespace GoogleConvert.Models
             }
             catch (Exception e)
             {
-                return e.ToString();
+                return new ResponseData { value = e.ToString(), success = false, message = "Error" };
             }
-            return BitConverter.ToString(bytes);
+            return new ResponseData { value = BitConverter.ToString(bytes), success = true, message = "OK" };
         }
         #endregion
     }

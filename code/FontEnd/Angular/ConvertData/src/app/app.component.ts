@@ -1,3 +1,4 @@
+// file code chính
 import { Component } from '@angular/core';
 
 @Component({
