@@ -8,6 +8,6 @@ namespace GoogleConvert.Models
         public ResponseData ArrByteToString(string inType, byte[] bytes);
         public ResponseData ArrByteToBase64(string inType, byte[] bytes);
         public ResponseData ArrByteToHex(string inType, byte[] bytes);
-        public ResponseData InputToOutput(string inType);
+        public ResponseData InputToOutput(string inputValue);
     }
 }
