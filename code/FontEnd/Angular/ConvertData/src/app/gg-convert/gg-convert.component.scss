@@ -73,13 +73,23 @@
         font-size: 20px;
         font-family: Arial, Helvetica, sans-serif;
     }
+    .invalue{
+        margin-left: 15px;
+        width: 100%;
+        resize: none;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .outvalue{
+        margin-left: 30px;
+    }
 }
 
 .contentvalue .small {
     border-right: none;
 }
-
-
 
 .inputType .lbText {
     font-size: 20px;
@@ -123,5 +133,16 @@ select {
         font-size: 14px;
         font-family: Arial, Helvetica, sans-serif;
         color: grey;
+    }
+
+    .subContent{
+        display: flex;
+        .remove{
+            height: 20px;
+            border: none;
+        }
+        img{
+            height: 20px;
+        }
     }
 }

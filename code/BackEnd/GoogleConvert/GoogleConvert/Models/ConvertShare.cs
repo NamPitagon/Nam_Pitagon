@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 namespace GoogleConvert.Models
@@ -7,8 +8,26 @@ namespace GoogleConvert.Models
     {
         public byte[] ConvertStringToArrByte(string inputValue)
         {
+            byte[] bytes = new byte[] { };
             if (string.IsNullOrEmpty(inputValue)) return null;
-            else return Encoding.UTF8.GetBytes(inputValue);
+            else
+            {
+                string removeChar = inputValue;
+                removeChar = Regex.Replace(removeChar, @"[^0-9]", "");
+                if (IsNumeric(removeChar) && removeChar != "")
+                {
+                    inputValue = Regex.Replace(inputValue, @"\s+", " ");
+                    string[] arr = inputValue.Split(new Char[] { ' ', '-' });
+                    bytes = new byte[arr.Length];
+                    for (int i = 0; i < arr.Length; i++)
+                        bytes[i] = (byte)int.Parse(arr[i].ToString());
+                }
+                else
+                {
+                    bytes = Encoding.UTF8.GetBytes(inputValue);
+                }
+            }
+            return bytes;
         }
 
         public byte[] ConvertBase64ToArrByte(string inputValue)
@@ -31,6 +50,7 @@ namespace GoogleConvert.Models
                 return bytes;
             }
         }
+
         public string ConvertArrByteToString(byte[] bytes)
         {
             if (bytes.Length == 0) return null;
@@ -41,6 +61,11 @@ namespace GoogleConvert.Models
                     strBuilder.Append(b.ToString() + " ");
                 return strBuilder.ToString().Trim();
             }
+        }
+
+        public bool IsNumeric(string value)
+        {
+            return value.All(char.IsNumber);
         }
     }
 }

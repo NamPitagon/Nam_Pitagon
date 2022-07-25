@@ -36,18 +36,24 @@
     <div class="contentvalue">
         <div class="textBox small">
             <div class="subbox">
-                <textarea class="invalue" id="code_textarea" rows="4" [(ngModel)]="inputValue" name="name2" required (ngModelChange)="ChangeInput($event)"> 
+                <div class="subContent">
+                    <textarea class="invalue" rows="4" id="code_textarea" [(ngModel)]="inputValue" name="name2" required (ngModelChange)="ChangeInput($event)"> 
 
-                </textarea>
+                    </textarea>
+                    <button class="remove" *ngIf="hidden" (click)="removeValue()">X</button>
+                </div>
                 <p for="">{{countInputValue}}/5.000</p>
             </div>
 
         </div>
         <div class="textBox">
             <div class="subbox">
-                <textarea class="outvalue" rows="5" [(ngModel)]="outputValue" name="name3" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bản Convert" required>
+                <div class="subContent">
+                    <textarea class="outvalue" rows="4" [(ngModel)]="outputValue" name="name3" placeholder="Bản Convert" required>
 
-                </textarea>
+                    </textarea>
+                    <img *ngIf="hidden" src="../../assets/SaveConvert.PNG" alt="">
+                </div>
 
             </div>
         </div>

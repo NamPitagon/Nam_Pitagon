@@ -1,0 +1,60 @@
+<div class="header">
+    <h2>
+        <span style="color: blue;">G</span>
+        <span style="color: red;">o</span>
+        <span style="color: black;">o</span>
+        <span style="color: blue;">g</span>
+        <span style="color: green;">l</span>
+        <span style="color: red;">e </span>
+        <span style="color: gray;">Convert</span>
+    </h2>
+</div>
+
+<form class="content" #heroForm="ngForm">
+    <div class="contenttype">
+        <div class="inputType">
+            <div class="lbText">Phát hiện kiểu dữ liệu</div>
+            <div class="chooseDataType">
+                <select id="converts" [(ngModel)]="inputType" name="name" (ngModelChange)="changeInType($event)"> 
+                    <option *ngFor="let val of type" [value]="val.code">{{val.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="Xchange">
+            <img src="../../assets/Exchange.png" alt="" (click)="clickChangeType()" class ="imageConvert">
+        </div>
+        <div class="outputType">
+            <div class="lbText">Kiểu dữ liệu cần chuyển</div>
+            <div class="chooseDataType">
+                <select id="converts" [(ngModel)]="outputType" name="name1" (ngModelChange)="changeOutType($event)">
+                    <option *ngFor="let val of type" [value]="val.code">{{val.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="contentvalue">
+        <div class="textBox small">
+            <div class="subbox">
+                <textarea class="invalue" id="code_textarea" rows="4" [(ngModel)]="inputValue" name="name2" required (ngModelChange)="ChangeInput($event)"> 
+
+                </textarea>
+                <p for="">{{countInputValue}}/5.000</p>
+            </div>
+
+        </div>
+        <div class="textBox">
+            <div class="subbox">
+                <textarea class="outvalue" rows="5" [(ngModel)]="outputValue" name="name3" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bản Convert" required>
+
+                </textarea>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="footer">
+
+</div>

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Company\\Pitagon\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj": {}
+    "D:\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj": {}
   },
   "projects": {
-    "D:\\Company\\Pitagon\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj": {
+    "D:\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Company\\Pitagon\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj",
+        "projectUniqueName": "D:\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj",
         "projectName": "GoogleConvert",
-        "projectPath": "D:\\Company\\Pitagon\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj",
-        "packagesPath": "C:\\Users\\NamBN\\.nuget\\packages\\",
-        "outputPath": "D:\\Company\\Pitagon\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\obj\\",
+        "projectPath": "D:\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\GoogleConvert.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Nam_Pitagon\\code\\BackEnd\\GoogleConvert\\GoogleConvert\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\NamBN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Public\\Documents\\Infragistics\\NuGet\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

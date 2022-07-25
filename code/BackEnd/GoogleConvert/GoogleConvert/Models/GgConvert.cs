@@ -1,129 +1,185 @@
 ﻿using GoogleConvert.Dto;
 using System;
 using System.Text;
-using System.Text.RegularExpressions;
 namespace GoogleConvert.Models
 {
     public class GgConvert : IGgConvert
     {
         public readonly ConvertShare _convertShare;
-
         public GgConvert(ConvertShare convertShare)
         {
             _convertShare = convertShare;
         }
-
-        #region Convert string -> base64, string -> hex, string -> byte[] và ngược lại
-        public ResponseData StringToBase64(string inputValue)
+        #region convert string -> ...
+        public ResponseData ggConvertData(string inputType, string outputType, string inputValue)
         {
-            if (inputValue == null)
+            ResponseData result = new ResponseData();
+            byte[] bytes = new byte[] { };
+            switch (inputType)
             {
-                return new ResponseData { value = null, success = false, message = "Error" };
+                case ("String"):
+                    switch (outputType)
+                    {
+                        case ("Base64"):
+                            bytes = _convertShare.ConvertStringToArrByte(inputValue);
+                            result = ArrByteToBase64(inputType, bytes);
+                            break;
+                        case ("Hex"):
+                            bytes = _convertShare.ConvertStringToArrByte(inputValue);
+                            result = ArrByteToHex(inputType, bytes);
+                            break;
+                        case ("ArrayByte"):
+                            bytes = _convertShare.ConvertStringToArrByte(inputValue);
+                            result = ArrByteToString(inputType, bytes);
+                            break;
+                        case ("String"):
+                            result = InputToOutput(inputValue);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case ("Base64"):
+                    switch (outputType)
+                    {
+                        case ("String"):
+                            bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
+                            result = ArrByteToString(inputType, bytes);
+                            break;
+                        case ("ArrayByte"):
+                            bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
+                            result = ArrByteToBase64(inputType, bytes);
+                            break;
+                        case ("Hex"):
+                            bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
+                            result = ArrByteToHex(inputType, bytes);
+                            break;
+                        case ("Base64"):
+                            result = InputToOutput(inputValue);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case ("Hex"):
+                    switch (outputType)
+                    {
+                        case ("String"):
+                            bytes = _convertShare.ConvertHexToArrByte(inputValue);
+                            result = ArrByteToString(inputType, bytes);
+                            break;
+                        case ("ArrayByte"):
+                            bytes = _convertShare.ConvertHexToArrByte(inputValue);
+                            result = ArrByteToHex(inputType, bytes);
+                            break;
+                        case ("Base64"):
+                            bytes = _convertShare.ConvertHexToArrByte(inputValue);
+                            result = ArrByteToBase64(inputType, bytes);
+                            break;
+                        case ("Hex"):
+                            result = InputToOutput(inputValue);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case ("ArrayByte"):
+                    switch (outputType)
+                    {
+                        case ("String"):
+                            bytes = _convertShare.ConvertStringToArrByte(inputValue);
+                            result = ArrByteToString(inputType, bytes);
+                            break;
+                        case ("Hex"):
+                            bytes = _convertShare.ConvertStringToArrByte(inputValue);
+                            result = ArrByteToHex(inputType, bytes);
+                            break;
+                        case ("Base64"):
+                            bytes = _convertShare.ConvertStringToArrByte(inputValue);
+                            result = ArrByteToBase64(inputType, bytes);
+                            break;
+                        case ("ArrayByte"):
+                            result = InputToOutput(inputValue);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+        #endregion
+        public ResponseData ArrByteToString(string inType, byte[] bytes)
+        {
+            ResponseData result = new ResponseData();
+            if (inType == "String")
+            {
+                string rslt = _convertShare.ConvertArrByteToString(bytes);
+                result.value = rslt;
+                result.success = true;
+                result.message = "OK";
             }
             else
             {
-                byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
-                return new ResponseData { value = Convert.ToBase64String(bytes), success = true, message = "OK" };
+                result.value = Encoding.UTF8.GetString(bytes);
+                result.success = true;
+                result.message = "OK";
+
             }
+            return result;
         }
-
-        public ResponseData StringToHex(string inputValue)
+        public ResponseData ArrByteToBase64(string inType, byte[] bytes)
         {
-            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
-            StringBuilder strBuilder = new StringBuilder(bytes.Length * 2);
-            foreach (byte b in bytes)
-                strBuilder.AppendFormat("{0:X2}", b);
-            return new ResponseData { value = strBuilder.ToString(), success = true, message = "OK" };
-        }
-
-        public ResponseData StringToArrByte(string inputValue)
-        {
-            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
-            string resultArrbyte = _convertShare.ConvertArrByteToString(bytes);
-            return new ResponseData { value = resultArrbyte, success = true, message = "OK" };
-        }
-
-        public ResponseData ArrByteToString(string inputValue)
-        {
-            inputValue = Regex.Replace(inputValue, @"\s+", " ");
-            string[] arr = inputValue.Split(new Char[] { ' ', '-' });
-            byte[] bytes = new byte[arr.Length];
-            try
+            ResponseData result = new ResponseData();
+            if (inType == "Base64")
             {
-                for (int i = 0; i < arr.Length; i++)
-                    bytes[i] = (byte)int.Parse(arr[i].ToString());
+                string resultArrByte = _convertShare.ConvertArrByteToString(bytes);
+                result.value = resultArrByte;
+                result.success = true;
+                result.message = "OK";
             }
-            catch (Exception e)
+            else
             {
-                return new ResponseData { value = e.ToString(), success = false, message = "Error" };
+                result.value = Convert.ToBase64String(bytes, 0, bytes.Length);
+                result.success = true;
+                result.message = "OK";
+
             }
-            return new ResponseData { value = Encoding.UTF8.GetString(bytes, 0, bytes.Length), success = true, message = "OK" };
+            return result;
         }
-
-        public ResponseData Base64ToString(string inputValue)
+        public ResponseData ArrByteToHex(string inType, byte[] bytes)
         {
-            byte[] bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
-            return new ResponseData { value = Encoding.UTF8.GetString(bytes), success = true, message = "OK" };
-        }
-
-        public ResponseData HexToString(string inputValue)
-        {
-            byte[] bytes = _convertShare.ConvertHexToArrByte(inputValue);
-            return new ResponseData { value = Encoding.UTF8.GetString(bytes), success = true, message = "OK" };
-        }
-        #endregion
-
-        #region Convert base64 -> hex, base -> byte[] và ngược lại
-        public ResponseData Base64ToArrByte(string inputValue)
-        {
-            byte[] bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
-            string resultArrByte = _convertShare.ConvertArrByteToString(bytes);
-            return new ResponseData { value = resultArrByte, success = true, message = "OK" };
-        }
-
-        public ResponseData Base64ToHex(string inputValue)
-        {
-            byte[] bytes = _convertShare.ConvertBase64ToArrByte(inputValue);
-            return new ResponseData { value = BitConverter.ToString(bytes), success = true, message = "OK" };
-        }
-
-        public ResponseData ArrByteToBase64(string inputValue)
-        {
-            byte[] bytes = _convertShare.ConvertStringToArrByte(inputValue);
-            return new ResponseData { value = Convert.ToBase64String(bytes, 0, bytes.Length), success = true, message = "OK" };
-        }
-
-        public ResponseData HexToBase64(string inputValue)
-        {
-            byte[] bytes = _convertShare.ConvertHexToArrByte(inputValue);
-            return new ResponseData { value = Convert.ToBase64String(bytes), success = true, message = "OK" };
-        }
-        #endregion
-
-        #region Convert Hex -> byte [] và ngược lại
-        public ResponseData HexToArrByte(string inputValue)
-        {
-            byte[] bytes = _convertShare.ConvertHexToArrByte(inputValue);
-            string resultArrbyte = _convertShare.ConvertArrByteToString(bytes);
-            return new ResponseData { value = resultArrbyte, success = true, message = "OK" };
-        }
-
-        public ResponseData ArrByteToHex(string inputValue)
-        {
-            inputValue = Regex.Replace(inputValue, @"\s+", " ");
-            string[] arr = inputValue.Split(new Char[] { ' ', '-' });
-            byte[] bytes = new byte[arr.Length];
-            try
+            ResponseData result = new ResponseData();
+            if (inType == "String")
             {
-                for (int i = 0; i < arr.Length; i++)
-                    bytes[i] = (byte)int.Parse(arr[i].ToString());
+                StringBuilder strBuilder = new StringBuilder(bytes.Length * 2);
+                foreach (byte b in bytes)
+                    strBuilder.AppendFormat("{0:X2}", b);
+                result.value = strBuilder.ToString();
+                result.success = true;
+                result.message = "OK";
             }
-            catch (Exception e)
+            else if (inType == "Hex")
             {
-                return new ResponseData { value = e.ToString(), success = false, message = "Error" };
+                string rslt = _convertShare.ConvertArrByteToString(bytes);
+                result.value = rslt;
+                result.success = true;
+                result.message = "OK";
             }
-            return new ResponseData { value = BitConverter.ToString(bytes), success = true, message = "OK" };
+            else
+            {
+                result.value = BitConverter.ToString(bytes);
+                result.success = true;
+                result.message = "OK";
+
+            }
+            return result;
         }
-        #endregion
+        public ResponseData InputToOutput(string inputValue)
+        {
+            return new ResponseData { value = inputValue, success = true, message = "OK" };
+        }
     }
 }
