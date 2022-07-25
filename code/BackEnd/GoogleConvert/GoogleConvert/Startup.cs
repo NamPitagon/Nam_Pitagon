@@ -33,8 +33,7 @@ namespace GoogleConvert
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:4200", "*");
-                    }
-                     );
+                    });
             });
             services.AddCors();
         }

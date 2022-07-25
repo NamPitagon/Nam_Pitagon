@@ -4,9 +4,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 namespace GoogleConvert.Models
 {
-    public class ConvertShare
+    public class ConvertToArrByte
     {
-        public byte[] ConvertStringToArrByte(string inputValue)
+        public static byte[] ConvertStringToArrByte(string inputValue)
         {
             byte[] bytes = new byte[] { };
             if (string.IsNullOrEmpty(inputValue)) return null;
@@ -14,7 +14,7 @@ namespace GoogleConvert.Models
             {
                 string removeChar = inputValue;
                 removeChar = Regex.Replace(removeChar, @"[^0-9]", "");
-                if (IsNumeric(removeChar) && removeChar != "")
+                if (removeChar.All(char.IsNumber) && removeChar != "")
                 {
                     inputValue = Regex.Replace(inputValue, @"\s+", " ");
                     string[] arr = inputValue.Split(new Char[] { ' ', '-' });
@@ -30,13 +30,13 @@ namespace GoogleConvert.Models
             return bytes;
         }
 
-        public byte[] ConvertBase64ToArrByte(string inputValue)
+        public static byte[] ConvertBase64ToArrByte(string inputValue)
         {
             if (string.IsNullOrEmpty(inputValue)) return null;
             else return Convert.FromBase64String(inputValue);
         }
 
-        public byte[] ConvertHexToArrByte(string inputValue)
+        public static byte[] ConvertHexToArrByte(string inputValue)
         {
             if (string.IsNullOrEmpty(inputValue)) return null;
             else
@@ -51,7 +51,7 @@ namespace GoogleConvert.Models
             }
         }
 
-        public string ConvertArrByteToString(byte[] bytes)
+        public static string ConvertArrByteToString(byte[] bytes)
         {
             if (bytes.Length == 0) return null;
             else
@@ -61,11 +61,6 @@ namespace GoogleConvert.Models
                     strBuilder.Append(b.ToString() + " ");
                 return strBuilder.ToString().Trim();
             }
-        }
-
-        public bool IsNumeric(string value)
-        {
-            return value.All(char.IsNumber);
         }
     }
 }

@@ -1,0 +1,26 @@
+Tìm hiểu Angular
+
+1. Cần phải hiểu các khái niệm sau:
+	- Components
+	- Templates
+	- Directives
+	- Dependecy injection
+
+2. Khái niệm angular
+	- Angular là nền tảng được xây dựng dựa trên TypeScript.
+
+3. Components trong Angular
+	- Để tạo 1 component thực hiện lệnh: ng g c "tên component"
+	- khi tạo xong sẽ xuất hiện 4 file bao gồm file html, css, .ts, .spec.ts trong đó file .ts là file code chính.
+	- để tạo 1 component theo một cách thủ công:
+	  + tạo tệp nameconponent_component.ts
+	  + import module Component từ angular/core
+	  + thêm component @Component để khai báo selector (thẻ để hiện thị trong html khác),
+	    chỉ định file html (templateUrl), css (StyleUrls) được sử dụng
+	  + export class để các component khác có thể sử dụng.
+	- vòng đời của một component:
+	  + start: khởi tạo class component và hiển thị chế độ xem thành phần cùng các chế độ xem con của nó.
+	  + lifecycle event: 
+	    ngOnChanges(): được gọi khi mà bạn thực hiện sự thay đổi nào đó.
+		ngOnInit(): khởi tạo directive or componet
+		ngDestroy() dọn dẹp trước khi angular hủy directive or component
