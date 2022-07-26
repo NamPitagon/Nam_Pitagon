@@ -1,12 +1,14 @@
-﻿using System;
+﻿using GoogleConvert.Models.Share;
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-namespace GoogleConvert.Models
+
+namespace GoogleConvert.Models.ConvertDataToArrByte
 {
-    public class ConvertToArrByte
+    public class DataToArrByte
     {
-        public static byte[] ConvertStringToArrByte(string inputValue)
+        public static byte[] StringToArrByte(string inputValue)
         {
             byte[] bytes = new byte[] { };
             if (string.IsNullOrEmpty(inputValue)) return null;
@@ -22,21 +24,25 @@ namespace GoogleConvert.Models
                     for (int i = 0; i < arr.Length; i++)
                         bytes[i] = (byte)int.Parse(arr[i].ToString());
                 }
-                else
-                {
-                    bytes = Encoding.UTF8.GetBytes(inputValue);
-                }
+                else bytes = Encoding.UTF8.GetBytes(inputValue);
+                return bytes;
             }
-            return bytes;
         }
 
-        public static byte[] ConvertBase64ToArrByte(string inputValue)
+        public static byte[] Base64ToArrByte(string inputValue)
         {
             if (string.IsNullOrEmpty(inputValue)) return null;
-            else return Convert.FromBase64String(inputValue);
+            else
+            {
+                if (ShareCodeCheck.IsBase64String(inputValue))
+                {
+                    return Convert.FromBase64String(inputValue);
+                }
+                else return null;
+            }
         }
 
-        public static byte[] ConvertHexToArrByte(string inputValue)
+        public static byte[] HexToArrByte(string inputValue)
         {
             if (string.IsNullOrEmpty(inputValue)) return null;
             else
@@ -44,14 +50,12 @@ namespace GoogleConvert.Models
                 inputValue = Regex.Replace(inputValue, @"\s+|-", "");
                 byte[] bytes = new byte[inputValue.Length / 2];
                 for (int i = 0; i < bytes.Length; i++)
-                {
                     bytes[i] = Convert.ToByte(inputValue.Substring(i * 2, 2), 16);
-                }
                 return bytes;
             }
         }
 
-        public static string ConvertArrByteToString(byte[] bytes)
+        public static string FormatArrByteToString(byte[] bytes)
         {
             if (bytes.Length == 0) return null;
             else

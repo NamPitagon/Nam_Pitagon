@@ -1,6 +1,6 @@
 ﻿using GoogleConvert.Dto;
 
-namespace GoogleConvert.Models
+namespace GoogleConvert.Models.GoogleConvert
 {
     public interface IGgConvert
     {

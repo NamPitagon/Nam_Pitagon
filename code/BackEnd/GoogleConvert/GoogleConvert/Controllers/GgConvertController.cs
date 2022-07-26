@@ -1,5 +1,5 @@
 ﻿using GoogleConvert.Dto;
-using GoogleConvert.Models;
+using GoogleConvert.Models.GoogleConvert;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -14,7 +14,7 @@ namespace GoogleConvert.Controllers
         {
             _configuration = configuration;
         }
-        public IGgConvert googleConvert = new GgConvert(new ConvertToArrByte());
+        public GgConvert googleConvert = new GgConvert();
 
         [HttpPost("convert")]
         public ResponseData ggConvertData(string inputType, string outputType, string inputValue)

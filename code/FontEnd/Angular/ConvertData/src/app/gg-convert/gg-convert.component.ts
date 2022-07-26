@@ -70,7 +70,7 @@ export class GgConvertComponent implements OnInit {
     }
   }
 
-  ChangeInput(event: any) {
+  ChangeInput(event: Event) : void{
     this.clickConvert();
     this.countInputValue = this.inputValue.length;
     this.hidden = true;
@@ -100,6 +100,9 @@ export class GgConvertComponent implements OnInit {
     this.countInputValue = this.inputValue.length;
   }
 
+  SaveInputValue(){
+    
+  }
   clickConvert() {
     if (this.inputValue == null || this.inputType == undefined || this.inputType.length <= 0) {
       alert("Vui lòng thêm giá trị cho dữ liệu muốn chuyển!");

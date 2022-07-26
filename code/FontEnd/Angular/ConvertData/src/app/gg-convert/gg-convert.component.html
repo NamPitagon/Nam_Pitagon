@@ -37,7 +37,9 @@
         <div class="textBox small">
             <div class="subbox">
                 <div class="subContent">
-                    <textarea class="invalue" rows="4" id="code_textarea" [(ngModel)]="inputValue" name="name2" required (ngModelChange)="ChangeInput($event)"> 
+                    <textarea class="invalue" rows="4" id="code_textarea" [(ngModel)]="inputValue"
+                     name="name2" required (keydown.enter)="ChangeInput($event)" (blur) = 'ChangeInput($event)' 
+                     (keydown.space)="ChangeInput($event)"> 
 
                     </textarea>
                     <button class="remove" *ngIf="hidden" (click)="removeValue()">X</button>
