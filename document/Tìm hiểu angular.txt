@@ -24,3 +24,5 @@ Tìm hiểu Angular
 	    ngOnChanges(): được gọi khi mà bạn thực hiện sự thay đổi nào đó.
 		ngOnInit(): khởi tạo directive or componet
 		ngDestroy() dọn dẹp trước khi angular hủy directive or component
+		
+GITLAB:jwcXnb-rHYohBysUjppf
