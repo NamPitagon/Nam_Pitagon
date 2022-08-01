@@ -1,0 +1,54 @@
+TÌM HIỂU TRIGGER
+	Trigger là 1 đoạn mã thủ tục, nó vận hành khi mà có một sự kiện xảy ra.
+	ví dụ như chèn hàng trong table, thay đổi cấu trúc tables.
+
+	Trigger khác thủ tục ở chỗ:
+		- Trigger sẽ không làm thủ công như thủ tục.
+		- Trigger không nhận được thông số
+		- Người dùng sẽ không thể khôi phục các transaction trong trigger.
+
+	Để tạo trigger thì dùng lệnh 
+
+		create trigger trigger_name on {table_name} 
+		[WITH <Option>] { FOR | AFTER  } {[INSERT] | [UPDATE] | [DELETE]}
+		
+		- Người dùng cần chỉ rõ thời gian kích hoạt. Ví dụ Before là sử dụng khi muốn xử lý hành động trước khi có sự thay đổi.
+		  còn AFTER là cần xử lý hành động sau khi thay đổi.
+
+		- Sự kiện thì có thể là insert, update, delete, ...
+
+	Có 2 lớp trigger cụ thể:
+		- DDL: kích hoạt những sự kiện bị thay đổi cấu trúc như tạo, sửa, xóa bảng hoặc sửa đổi bảo mật.
+		- DML trigger: kích hoạt các câu lệnh sửa đổi dữ liệu như chèn vào bảng, cập nhật bảng, xóa bỏ bảng.
+		
+	Vai trò: SQL Server là CSDL quan hệ chính vì vậy nó có tính nhất quá dữ liệu
+			 thì để thực thi điều đó thì nó bắt buộc những khóa chính và khóa ngoại mà khi tables này thuộc 
+			 database khác nhau thì nó không thể đảm bảo được tính nguyên vẹn chính vì thế mà nó sinh ra trigger để giải quyết.
+			 
+TÌM HIỂU BIZTALK
+	- là sản phẩm phần mềm trung gian của Microsoft giúp kết nối nhiều hệ thống với nhau.
+	- ví dụ như message broker nó là một module trung gian để chuyển message từ người gửi đến người nhận.
+	  Thì ví dụ như RabbitMQ nó là 1 trong các message broker mà nó sẽ sử dụng các giao thức để nhận tin nhắn có sử dụng hàng đợi.
+	  
+WINDOWS SERVICES
+	- Hiểu đơn giản nó là 1 ứng dụng chạy trong một khoản thời gian dài từ khi bạn bật máy tính cho đến khi bạn tắt nó đi.
+	- có thể cài đặt qua command line chỉ cần trỏ đến thư mục chứa file exe và execute nó.
+	- Sử dụng windows service đơn giản ví dụ khách hàng muốn có 1 ứng dụng chạy ngầm để tổng hợp data dùng để xuất ra báo cáo, ...
+	  và người dùng không cần phải thao tác tới WS gì cả mà nó đều được chạy ngầm trên máy tính hoặc server
+	
+WCF Service
+	- là phương pháp giúp lập trình viên phát triển những ứng dụng dịch vụ.
+	- Các thành phần của WCF:
+	  + Service class: định nghĩa các Contracts
+	  + Hosting enviroment: có thể chạy được ở nhiều môi trường như Windows Service, IIS, Windows forms, các ứng dụng console
+	  + End point: các cổng kết nối giữa client với service.
+	  
+SHAREPOINT
+	- Là 1 nền tảng giúp phát triển ứng dụng web.
+	- Ưu điểm:
+		+ Trong khi các phần mềm khác theo tiêu chí có gì xài đó thì SharePoint có phép điều chỉnh theo nhu cầu người dùng.
+		+ Tích hợp các sản phẩm khác của Microsoft hoặc các hệ thống nghiệp vụ khác trên các nền tảng như Orracle, IBM,...
+		+ Cho phép tự xây dựng giải pháp cho riêng mình một cách nhanh chóng.
+	- Điểm khác nhau giữa SharePoint và OneDrive:
+		+ Đều được dùng để chia sẻ và lưu trữ tệp
+		+ Sự khác biệt là OneDrive không hỗ trợ metadata
