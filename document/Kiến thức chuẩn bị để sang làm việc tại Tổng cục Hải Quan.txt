@@ -1,0 +1,272 @@
+1. Các câu lệnh SQL
+	- Distinct: 
+		+ trả về các giá trị khác nhau của 1 bảng (các giá trị không trùng lặp)
+		+ Cấu trúc: SELECT Distinct cloumn_name FROM table_name
+	- WHERE
+		+ câu lệnh điều kiện để ra các giá trị.
+		+ Cú pháp WHERE column1 <operator> column2 ví dụ WHERE name = "Nguyễn Văn Nam"
+	- AND OR
+		+ dùng để nối các điều kiện lại với nhau nhau
+		+ Cú pháp: WHERE FirstName = "Nam" AND LastName = "Nguyễn"
+	- Count:
+		+ trả về số lượng các dòng được chọn ở bảng (COUNT(*))
+		+ Cú pháp : SELECT COUNT (col_name) FROM table_name\
+	- ORDER BY:
+		+ sắp xếp các bảng ghi, mặc định sẽ là sắp xếp tăng dần. Để giảm dần thì sử dụng từ khóa DESC
+		+ Cú pháo SELECT col_name1, col_name2 FROM table_name ORDER BY col_name, col_name ASC| DESC
+	- GROUP BY:
+		+ Các hàm tập hợp như SUM() thường sử dụng thêm mệnh đề GROUP BY.
+		+ dùng để tính tổng các giá trị theo từng nhóm riêng lẻ trong cột
+		+ Cú pháp: SELECT col_name, SUM(col_name) FROM table_name GROUP BY col_name
+	- HAVING:
+		+ câu lệnh điều kiện của GROUP BY
+		+ thay thế cho mệnh đề Where vì mệnh đề where không áp dụng được đối với các hàm tập hợp như SUM
+		+ Cú pháp: SELECT col_name, SUM(col_name) FROM table_name GROUP BY col_name HAVING SUM(col_name) điều kiện giá trị
+
+2. Các loại JOIN trong SQL SERVER
+	- Dùng để liên kết giữa các bảng với nhau. 
+	- Các loại join:
+		+ Inner Join: trả về tất cả các bản ghi khi có ít nhất một giá trị ở hai bảng.
+		+ LEFT JOIN: trả về các bản ghi của table bên trái và các bản ghi đúng cảu table bên phải
+		+ RIGHT JOIN: trả về các bản ghi của table bên phải và các bản ghi đúng của table bên trái.
+		+ FULL JOIN: trả về tất cả các dòng đúng với 1 trong các bảng.
+	- Cú pháp:
+		+ INNER JOIN: SELECT col_name FROM table_name1 INNER JOIN table_name2 ON table_name1.col_name = table_name2.col_name
+		+ LEFT JOIN: SELECT col_name FROM table_name1 LEFT JOIN table_name2 ON table_name1.col_name = table_name2.col_name
+		+ RIGHT JOIN: SELECT col_name FROM table_name1 RIGHT JOIN table_name2 ON table_name1.col_name = table_name2.col_name
+		+ FULL JOIN: SELECT col_name FROM table_name1 FULL OUTER JOIN table_name2 ON table_name1.col_name = table_name2.col_name
+		
+3. Khóa chính và Khóa ngoại
+	- Được sử dụng để thể hiện tính toàn vẹn dữ liệu.
+	- Khóa chính: 
+		+ dùng để phân biệt - định danh duy nhất mỗi bản ghi trong table.
+		+ thiết lập mối quan hệ 1 - n giữa 2 table trong csdl.
+		+ dữ liệu của của primkey phải là duy nhất và không thể Null.
+		+ Mỗi table nên chỉ có 1 khóa chính nhưng không có nghĩa là 1 bảng chỉ có 1 khóa chính
+		  ví dụ bảng chi tiết hóa đơn sẽ có 2 khóa chính là ID_HD, ID_SP
+	- Khóa ngoại: 
+		+ là con trỏ để trỏ đến khóa chính của table khác.
+		+ tức là khóa ngoại là ID_Khách hàng trong bảng hóa đơn nhưng là khóa chính của bảng Khách hàng.
+		  khi đó khi dựa vào khóa ngoại này thì người dùng có thể lấy ra thông tin của khách hàng dựa vào ID_Khách tại bảng Hóa đơn.
+
+4. Trigger
+	- là đoạn mã thủ tục.
+	- được kích hoạt khi mà có sự thay đổi như thêm bản ghi, tạo bảng mới , ...
+	- cú pháp create trigger trigger_name ON table_name FOR {[UPDATE| DELETE |INSERT]} AS câu lệnh SQL
+	- dùng để ràng buộc trên nhiều mối quan hệ (nhiều table) hoặc nhiều bản ghi của bảng.
+	- Ví dụ về Trigger
+		+ Trigger thêm (cập nhật hàng trong kho sau khi đặt hàng hoặc cập nhật)
+		CREATE TRIGGER col_datHang ON tbl_datHang AFTER INSERT AS
+		BEGIN
+			UPDATE tbl_datHang
+			SET SoluongTon = SoLuongTon - (SELECT SoluongDat FROM inserted WHERE maHang = tbl_KhoHang.maHang)
+			FORM tbl_KhoHang
+			JOIN inserted ON tbl_KhoHang.maHang = inserted.maHang
+		END
+		
+		+ Trigger Xóa (Cập nhật hàng trong kho sau khi hủy đặt hàng)
+		CREATE TRIGGER col_capNhatDatHang ON tbl_datHang FOR DELETE AS
+		BEGIN
+			UPDATE tbl_KhoHang
+			SET SoLuongTon = SoLuongTon + (SELECT SoluongDat FORM deleted WHERE maHang = tbl_KhoHang.maHang)
+			FROM tbl_KhoHang
+			JOIN deleted ON tbl_KhoHang.maHang = deleted.maHang
+		END
+		
+		+ Trigger Sửa (cập nhật hàng trong kho sau khi cập nhật đặt hàng)
+		CREATE TRIGGER col_capNhatDatHang ON tbl_datHang AFTER UPDATE AS
+		BEGIN
+			UPDATE tbl_KhoHang
+			SET SoLuongTon = SoLuongTon - 
+			      (SELECT SoluongDat FROM inserted WHERE maHang = tbl_KhoHang.maHang)
+				   + (SELECT SoluongDat FORM deleted WHERE maHang = tbl_KhoHang.maHang)
+			FROM tbl_KhoHang
+			JOIN deleted ON tbl_KhoHang.maHang = deleted.maHang
+		END
+
+5. So sánh giữa các kiểu dữ liệu string và String, Int và Integer.Int32
+	- Về mặt kĩ thuật chúng không khác nhau.
+	- String được sử dụng khi muốn tham chiếu đến một lớp cụ thể.
+	- string được sử dụng khi muốn cập nhật một đối tượng nào đó.
+
+6. View State và Session
+	- View State: 
+		+ là kĩ thuật để giữ lại trạng thái của trang mặc dù được Postbacks.
+		+ Postbacks: là khi người dùng cần thay đổi dữ liệu trên trang web, và yêu cầu này được gửi về server dưới dạng HTTP Request
+		+ Các giá trị lưu trong View State sẽ lần lượt lưu trữ và gửi tới client browser theo giá trị của 1 hidden form input.
+		+ Được khai báo như sau:
+		  <input type = "hidden" name ="__VIEWSTATE" id = "__VIEWSTATE" value = "/wEPDwUK..."/>
+		+ Mặc định ViewState sẽ gửi tới client Browser sau đó sẽ trở lại server trên form của 1 hidden input control.
+		+ Để disable ViewState cho một control set thuộc tính EnableViewState là false
+		  <asp:Label ID = "lbRequestCount" runat = server" EnableViewState = "false"></asp:Lable>
+		+ Ví dụ về lưu trữ 1 giá trị Integer vào ViewState
+		  public int SomeInteger{
+			get { 
+				object o = ViewState["SomeInteger"];
+				if(!o == null) return (int)o;
+				return 0;
+			}
+			set {
+				ViewState["SomeInteger"] = value;
+			}
+		  }
+	
+	- Session
+		+ là cơ chế lưu lại dữ liệu của phiên làm việc cho ứng dụng.
+		+ Ví dụ dễ hiểu: Khi người dùng đã đăng nhập thì thông tin đăng nhập được lưu lại và khi người dùng
+		  đặt hàng thì thông tin đăng nhập của người dùng được gửi đến trang thanh toán, ...
+		+ Hiểu ngắn hơn là khi đăng nhập xong thì nó sẽ lưu lại thông tin và khi người dùng làm bất cứ điều gì (mỗi lần gửi request) thì
+		  người dùng sẽ không phải đăng nhập lại nữa.
+
+7. Data Annotation (Atribute)
+	- Annotation: thuộc tính chú thích tác động vào thành phần như lớp hay thuộc tính hay phương phức của program.
+	- giúp thông tin của lớp, method, thuộc tính được mở rộng.
+	- Trong C# gọi là Atribute còn trong Java gọi là Annotation.
+	- Cú pháp: [AtributeName(param1, param2, ...)]
+	- Ví dụ: trong C# có thuộc tính Obsolete đánh dấu phương thức, class là lạc hậu
+      public class MyClass{
+		[Obsolete ("Phương thức này lỗi thời, hãy dùng phương thức khác")]
+		public static void Method(){
+			Console.WriteLine ("Phương thức chạy");
+		}
+	  }
+	- Một số Data Annotation trong C#
+		+ Required: dữ liệu không được null [Required (ErrorMessage = "{0} cần thiết lập")]
+		+ StringLenght: thiết lập độ dài trường dữ liệu [StringLenght (20, MinimumLenght = 3, ErrorMessage="Phải dài từ 3 đến 20 ký tự")]
+		+ DataType: dữ liệu phải liên kết với một kiểu phù hợp [DataType(DataType.Text)] hay [DataType(DataType.PhoneNumber)]
+		+ Range: dữ liệu phải nằm trong khoảng nào đó [Range(18, 99, ErrorMessage = "Tuổi từ 18 đến 99)]
+		+ Phone: [Phone] dữ liệu phải là dạng số điện thoại.
+		+ EmailAddress [EmailAddress] Dữ liệu phải là dạng Email.
+	- Ví dụ cụ thể:
+		using System;
+		using System.ComponentModel.DataAnnotations;
+		namespace CS026_Attribute {
+		  public class Employer {
+			[Required (ErrorMessage = "Employee {0} is required")]
+			[StringLength (100, MinimumLength = 3, ErrorMessage = "Tên từ 3 đến  100 ký tự")]
+			[DataType (DataType.Text)]
+			public string Name { get; set; }
+
+			[Range (18, 99, ErrorMessage = "Age should be between 18 and 99")]
+			public int Age { get; set; }
+
+
+			[DataType (DataType.PhoneNumber)]
+			[Phone]
+			public string PhoneNumber { set; get; }
+
+			[DataType (DataType.EmailAddress)]
+			[EmailAddress]
+			public string Email { get; set; }
+		  }
+	    }
+	- Để kiểm tra tính hợp lệ của Atributer thì sử dụng class ValidationContext
+		Employee user = new Employee("Nguyễn Văn Nam", 22, "1234as", "namnv1012@gmail.com")
+		ValidationContext context = new ValidationContext(user, null, null);
+		
+		// tạo ra 1 list kết quả cho việc kiểm tra tính hợp lệ của Atributter
+		List<ValidationResult> results = new List<ValidationResult>();
+		
+		// thực hiện việc kiểm tra dữ liệu 
+		bool valid = Validator.TryValidateObject(user, context, results, true);
+		if(!valid)
+		{
+			foreach(ValidationResult rslt in results){
+				Console.Write($"{rslt.MemberNames.First(), 13}");
+				Console.Write($"{rslt.ErrorMessage}");
+			}
+		}
+
+8. Bất đồng bộ Await và Async
+	- Bất đồng bộ tức là khả năng thực thi các tác vụ khác nhau một cách độc lập.
+	- Tức là sẽ không nhất thiết phải chạy tuần tự mà có thể chạy song song với nhau.
+	- Xử lý đồng bộ tức là bắt đầu khi chạy main và kết thúc khi phương thức Main được trả về 
+      như vậy thì khi phương thức được gọi trước mà có lỗi thì phương thức được gọi phía sau sẽ không thể thực hiện.
+	- Trong bất đồng bộ phương thức được gọi sẽ được chạy trong background và việc gọi thread không bị block.
+	- Nếu chạy bất đồng bộ thì sau khi gọi DoTaskOne luôn sẽ thực thi ngay và lâp tức quay lại main và bắt đầu DoTaskTwo.
+	- Async:
+		+ Khai báo một hàm bất đồng bộ
+		+ Khi gọi đến hàm async nó sẽ xử lý mọi thức và được trả về kết quả trong hàm của nó.
+	- Await:
+		+ Tạm dừng việc thực hiện các hàm bất đồng bộ
+	- Ví dụ đơn giản hơn về xử lý bất đồng bộ
+	  Giả sử có 2 request được gọi đến:
+	  Nếu là xử lý đồng bộ: Request1 xử lý -> Response 1 -> Request2 xử lý -> Response 2
+	  Nếu là xử lý bất đồng bộ: Request1 xử lý -> Request2 xử lý -> Response 1 -> Response 2
+
+9. Process và Thread
+	- Process: gồm nhiều Thread
+	- Thread là xử lý đa luồng.
+	  
+10. Route Service
+	- 
+	
+11. Assembly và nuget
+	- Assembly là kết quả biên dịch của project trong C#
+	- Assembly có 2 dạng:
+		+ Dạng 1: chạy độc lập đặc thù là có phương thức static void Main(). Ví dụ như Windows Forms, ...
+				  Thường có dạng exe, giống như các file cài đặt trong windows.
+		+ Dạng 2: chạy dựa vào project khác, đặc thù là không có phương thức static voi Main().
+		          Thường có dạng dll tương tự như file hệ thống của windows
+	- Assembly dùng để tái sử dụng code độc lập với ng2 lập trình.
+	- Nuget là hệ thống quản lý gói phần mềm mã mở miễn phí.
+	- Nuget cung cấp việc cài các gói thư viện.
+
+12. LINQ
+	- là ngôn ngữ truy vấn tích hợp.
+	- tích hợp ngôn ngữ truy vấn gần giống SQL vào ngôn ngữ C#.
+	
+13.Debug và trace
+	- Trace dùng để theo dõi các hành động xảy ra. Nó hoạt động trong các đóng gói cả Debug và Release.
+	  Có khả năng của chương trình tự đưa ra các thông tin về hành động của mình.
+	- Debug dùng để tìm và sửa các lỗi trong chương trình.
+	  Nó chỉ hoạt động trong đóng gói debug.
+
+15. .NET là OOP hay AOP  -> OOP
+
+16. Phân biệt fuction và thủ tục
+	- Fuction nó có thể thực hiện nhiều nhiệm vụ khác nhau
+	- Thủ tục chỉ làm một nhiệm vụ duy nhất.
+	
+17. Tìm hiểu về Web Service
+	- Khi sd facebook chẳng hạn sẽ có lên tới hàng trăm nghìn người sử dụng
+	  -> việc giao tiếp giữa client và server bị chặn lại
+	  -> sinh ra web service để giải quyết vấn đề này.
+	- Các thành phần của web service:
+		1. XML
+		+ XML: định nghĩa thành phần dữ liệu trên trang web.
+		+ XML khác HTML là HTML định nghĩa xem thành phần đó hiển thị như thế nào
+		  Còn XML thì định nghĩa xem thành phần đó chứa cái gì.
+		2. Web Service Description Language
+		+ mô tả dịch vụ web theo cú pháp tổng quát XML gồm:
+			Tên dịch vụ
+			Giao thức và kiểu mã hóa được sử dụng khi gọi các hàm dịch vụ web
+			Loại thông tin: thao tác, tham số, kiểu dữ liệu có thể là giao diện của dịch vụ web công với tên của giao diện này.
+		+ WSDL hợp lệ khi gồm 2 thành phần:
+			Giao diện
+			Mô tả thông tin truy xuất CSDL.
+			-> 2 phần này được lưu vào tập tin XML tương ứng là tập tin giao diện dịch vụ và tập tin thi hành dịch vụ.
+		3. UDDI
+		+ Cho phép Client truy tìm và nhận những thông tin được yêu cầu khi sử dụng dịch vụ web
+		+ cấu trúc của UDDI
+			Trang trắng: chứa thông tin liên hệ và các định dạng chính của dịch vụ web như tên giao dịch, địa chỉ, ...
+			Trang vàng: chứa thông tin mô tả dịch vụ web theo những loại khác nhau.
+			Trang xanh: chứa thông tin kỹ thuật mô tả hành vi và các chức năng của dịch vụ web
+			Loại dịch vụ: chứa thông tin về loại dịch vụ được sử dụng.
+		4. SOAP Simple Object Access Protocol
+		+ là giao thức giao tiếp có cấu trúc như XML
+		+ dùng để truy xuất dịch vụ
+		+ là cấu trúc xương sống cảu các ứng dụng phân tán được xây dựng từ nhiều ngôn ngữ và hđh khác nhau.
+		+ là giao thức thay đổi các thông điểm dựa trên XML qua mạng máy tính, thông thường sử dụng HTTP
+	- Hoạt động của web service:
+		+ gồm 2 thành phần client và server giao tiếp với nhau thông qua HTTP
+		+ Client gửi yêu cầu thông qua các lời gọi hàm bằng HTTP Request đến Server
+		+ Server gửi các kết quả được thực thi ở các hàm thông qua HTTP Request.
+	
+	- Mô tả hoạt động của ứng dụng webservice gồm 3 thành phần chính:
+		+ UDDI register: cho người dùng biết thông tin về webservice
+		+ WebService: chứa giao thức SOAP định dạng dữ liệu, tài liệu WSDL
+		+ Application Client: ứng dụng phía Client sử dụng Webservice xây dựng riêng cho mình.
+	Đầu tiên, Application Client cần truy vấn các mẫu tin UDDI theo 1 thông tin nào đó để xác định webservice cần tìm
+	Client lấy thông tin về địa chỉ của tài liệu WSDL của Webservice này dựa trên mẫu tin UDDI. Tài liệu WSDL sẽ mô tả cách thức liên lạc với WebService, định dạng gói tin truy vấn và phản hồi.
+	Client dựa vào đó để tạo những gói tin SOAP tương ứng để liên lạc với Service.

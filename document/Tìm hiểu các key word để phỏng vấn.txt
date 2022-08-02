@@ -52,3 +52,19 @@ SHAREPOINT
 	- Điểm khác nhau giữa SharePoint và OneDrive:
 		+ Đều được dùng để chia sẻ và lưu trữ tệp
 		+ Sự khác biệt là OneDrive không hỗ trợ metadata
+
+Tìm hiểu .net core
+	- Mô hình MVC: Model - View - Controller
+	  Với Model: dùng để chứa các phương thức logic, kết nối và truy xuất db, ...
+	  Với View: là thành phần hiển thị thông tin và tương tác với người dùng.
+	  Với Controller: là thành phần để điều hướng, nhận các request từ người dùng sau tương tác với model và gửi cho view để hiển thị lại cho người dùng.
+	- Sự khác nhau giữa ViewBag và ViewData
+		+ ViewBag truy cập giống truy cập thuộc tính của object (sử dụng dấu chấm)
+		+ ViewData sử dụng cú pháp Dictionary để truy cập giá trị
+		+ cả ViewData và ViewBag đều có thể truyền dữ liệu từ Controller sang View nhưng không thể truyền dữ liệu từ Controller này sang controller khác.
+	- Web service là tập hợp các giao thức hay tiêu chuẩn để trao đổi dữ liệu giữa các ứng dụng hoặc giữa các hệ thống.
+		+ Các giao thức http hay sử dụng: get, post, put, delete
+		+ các http status code thường gặp
+			+ 2XX: hiểu đơn giản là yêu cầu đã được chấp nhận và xử lý thành công.
+			+ 4XX: lỗi phía client
+			+ 5XX: lỗi phía server
